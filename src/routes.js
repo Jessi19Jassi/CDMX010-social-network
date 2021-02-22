@@ -1,6 +1,6 @@
-import { home } from './home.js';
-import { contact } from './contact.js';
-import { about } from './about.js';
+import { home } from './principal.js';
+import { contact } from './inicio.js';
+import { about } from './formularioRegistro.js';
 
 const rootDiv = document.getElementById('root');
 
