@@ -1,6 +1,6 @@
 import {onNavigate} from './routes.js'
 
-export const about = (target) =>{
+export const register = (target) =>{
     const html= `
 <h1>Registrate</h1>
 <input id="nom" type="text" placeholder="Nombre">
@@ -17,7 +17,7 @@ target.innerHTML = html
 
 document.getElementById('restrarse').addEventListener('click', (e) => {
     e.preventDefault()
-    onNavigate('/contact')
+    onNavigate('/singUp')
 })
 
 }

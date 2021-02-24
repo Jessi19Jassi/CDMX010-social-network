@@ -1,13 +1,13 @@
-import { home } from './principal.js';
-import { contact } from './inicio.js';
-import { about } from './formularioRegistro.js';
+import { home } from './home.js';
+import { singUp } from './singUp.js';
+import { register } from './register.js';
 
 const rootDiv = document.getElementById('root');
 
 export const routes = { //Array donde estarán las rutas que necesitamos, referencia directa de los botones
     '/': home, //Valor que se consulta en cada elemento
-    '/contact': contact,
-    '/about': about,
+    '/singUp': singUp,
+    '/register': register,
 };
 
 export const onNavigate = (pathname) => {

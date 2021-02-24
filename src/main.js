@@ -1,9 +1,3 @@
-// Este es el punto de entrada de tu aplicacion
-
-// import { myFunction } from './lib/index.js';
-
-// myFunction();
-
 import { routes } from './routes.js'
 
 const rootDiv = document.getElementById('root');
