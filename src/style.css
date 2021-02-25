@@ -5,25 +5,21 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 .displayOne{
-    background: #FFEEF1;
-    padding: 24%;
-
+    display: flex;
+    background-color:#FFEEF1;
+    padding: 25%;
 }
-
 .title{
-    font-family: 'Courier New', Courier, monospace;
     position: absolute;
-    margin: -20%;
+    font-family: -webkit-body;
     font-size: xx-large;
-    right: 75%;
+    margin: -18%;
 }
-
 .singUp{
     position: absolute;
     border: 2px solid #FF87AB;
-    background-color: #FF97B782;
+    background-color: #fab9ce54;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,51 +30,49 @@
     width: 21%;
     right: 21%;
     border-radius: 26px 26px;
+    
+    
 }
-
 .buttonF{
     background-color: #2f55a4;
     height: 6%;
-    margin: 6% 2% 6%;
+    margin: 2%;
     width: 55%;
     border-radius: 8px 8px;
     cursor: pointer;
     border: 0;
-    outline: none; /*contorno de los input*/
+    outline: none;
+    
 }
-
 .buttonG{
     background-color: #db4a39;
-    margin: 0 2% 2%;
+    margin: 2%;
     height: 6%;
     width: 55%;
     border-radius: 8px 8px;
     cursor: pointer;
     border: 0;
-    outline: none; /*contorno de los input*/
+    outline: none;
+    
 }
-
 .singUp input{
+    border: 0;
     background-color: #f8efeffc;
+    margin: 2%;
     text-align: center;
     height: 6%;
     width: 55%;
-    border: 19%;
-    margin: 2%;
-    border: 0; 
-    outline: none; /*contorno de los input*/
+    outline: none;
     border-radius: 8px 8px;
 }
-
-.buttonSingUp{
-    background-color: #e44078;
-    border-radius: 14px 14px;
+.bottonSingUp{
+    margin: 2%;
+    background: #e44078;
     height: 7%;
     width: 36%;
-    margin: 5%;
+    font-size: larger;
+    border-radius: 14px 14px;
     cursor: pointer;
     border: 0;
-    outline: none; /*contorno de los input*/
+    outline: none;
 }
-
-

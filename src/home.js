@@ -3,29 +3,32 @@ import { onNavigate } from './routes.js'
 export const home = (target) => {
     const html = `
     <div class="displayOne">
-        <div class="title">
-            <h1>Visage D' Amour<h1>
-            <img src="./logo.png">
-        </div>
-            <div class="singUp">
-                <button class="buttonF">Iniciar sesión con Facebook<i class="fab fa-facebook"></i></button><br>
-                <button class="buttonG">Iniciar sesión con Google<i class="fab fa-google"></i></button><br>
-                <p> ó </p><br>
-                <input id="name" type="text" placeholder="usuario">
-                <br>
-                <input id="password" type="text" placeholder="contraseña">
-                <br>
-                <button id="singUp" class="buttonSingUp">Ingresar</button>
-                <p>¿No tiene cuenta?</p>
-                <br>
-                <ul class="navbar-item"><a href="#" id="register">Registrate!!</a></ul>
+    <div class="title">
+    <h1>Visage D' Amour<h1>
+    <img src="../imagenes/visage4.png">
+    </div>
+    <div class="singUp">
+    <button class="buttonF">Iniciar sesion con Facebook <i class="fab fa-facebook"></i></button>
+    <br>
+    <button class="buttonG">Iniciar sesion con Google <i class="fab fa-google"></i></button>
+    <br>
+    <p>O</p>
+    <br>
+    <input id="name" type="text" placeholder="usuario">
+    <br>
+    <input id="password" type="text" placeholder="contraseña">
+    <br>
+    <button class="bottonSingUp" id="ingreso">Ingresar</button>
+    <br>
+        <p>¿No tienes cuenta?</p>
+            <ul class="navbar-item"><a href="#" id="aboutLink">Registrate!!</a></ul>
             </div>
             </div>
-                `
+    `
 
     target.innerHTML = html
 
-    document.getElementById('register').addEventListener('click', (e) => {
+    document.getElementById('aboutLink').addEventListener('click', (e) => {
         e.preventDefault()
         onNavigate('/register')
     })
@@ -35,7 +38,7 @@ export const home = (target) => {
         onNavigate('/')
     })*/
 
-    document.getElementById('singUp').addEventListener('click', (e) => {
+    document.getElementById('ingreso').addEventListener('click', (e) => {
         e.preventDefault()
         onNavigate('/singUp')
     })
