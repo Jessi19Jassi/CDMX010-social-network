@@ -1,23 +1,27 @@
 import {onNavigate} from './routes.js'
-
-export const register = (target) =>{
+import {signUp} from './lib/firebase.js'
+//let registar = document.querySelector('.registro')//
+export var register = (target) =>{
     const html= `
-<h1>Registrate</h1>
-<input id="nom" type="text" placeholder="Nombre">
-<br>
-<input id="cElectronico" type="text" placeholder="Correo electronico">
-<br>
-<input id="Contraseña" type="text" placeholder="Contraseña">
-<br>
-<button id="restrarse">Registrarme</button>
+    <h1>Registrate</h1>
 
-`
-
+    <div class="form-input">
+    <div class="form-input">
+    <input id="email" type="text" placeholder="Correo electronico">
+    </div>
+    <div class="form-input">
+    <input id="password" type="text" placeholder="Contraseña">
+    </div>
+    <button class="registro">Registrarme</button>
+    <button  id="siguiente">siguiente</button>
+    `
 target.innerHTML = html
 
-document.getElementById('restrarse').addEventListener('click', (e) => {
+document.getElementById('siguiente').addEventListener('click', (e) => {
     e.preventDefault()
-    onNavigate('/singUp')
-})
-
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    signUp(email, password);
+    onNavigate('/singUp');
+  });
 }

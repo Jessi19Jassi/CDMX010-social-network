@@ -1,5 +1,6 @@
 import { onNavigate } from './routes.js'
-
+/*import {authCuentaGoogle} from './firebase.js'
+const objAuth = authCuentaGoogle()*/
 export const home = (target) => {
     const html = `
     <div class="displayOne">
@@ -10,7 +11,7 @@ export const home = (target) => {
     <div class="singUp">
     <button class="buttonF">Iniciar sesion con Facebook <i class="fab fa-facebook"></i></button>
     <br>
-    <button class="buttonG">Iniciar sesion con Google <i class="fab fa-google"></i></button>
+    <button class="buttonG" id="google">Iniciar sesion con Google <i class="fab fa-google"></i></button>
     <br>
     <p>O</p>
     <br>
@@ -33,10 +34,8 @@ export const home = (target) => {
         onNavigate('/register')
     })
 
-    /*document.getElementById('homeLink').addEventListener('click', (e) => {
-        e.preventDefault()
-        onNavigate('/')
-    })*/
+    //document.getElementById('google').addEventListener('click', () => {
+    //})
 
     document.getElementById('ingreso').addEventListener('click', (e) => {
         e.preventDefault()
