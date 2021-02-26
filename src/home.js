@@ -1,6 +1,8 @@
 import { onNavigate } from './routes.js'
-/*import {authCuentaGoogle} from './firebase.js'
-const objAuth = authCuentaGoogle()*/
+import {startGoogle} from './lib/firebase.js'
+import {startFacebook} from './lib/firebase.js'
+
+
 export const home = (target) => {
     const html = `
     <div class="displayOne">
@@ -9,7 +11,7 @@ export const home = (target) => {
     <img src="../imagenes/visage4.png">
     </div>
     <div class="singUp">
-    <button class="buttonF">Iniciar sesion con Facebook <i class="fab fa-facebook"></i></button>
+    <button class="buttonF" id="facebook">Iniciar sesion con Facebook <i class="fab fa-facebook"></i></button>
     <br>
     <button class="buttonG" id="google">Iniciar sesion con Google <i class="fab fa-google"></i></button>
     <br>
@@ -34,8 +36,20 @@ export const home = (target) => {
         onNavigate('/register')
     })
 
-    //document.getElementById('google').addEventListener('click', () => {
-    //})
+    document.getElementById('google').addEventListener('click', (e) => {
+
+        startGoogle();
+        e.preventDefault();
+        onNavigate('/singUp');
+    })
+
+    
+    document.getElementById('facebook').addEventListener('click', (e) => {
+
+        startFacebook();
+        e.preventDefault();
+        onNavigate('/singUp');
+    })
 
     document.getElementById('ingreso').addEventListener('click', (e) => {
         e.preventDefault()

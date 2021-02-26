@@ -22,25 +22,57 @@ export const signUp = (email, password) => {
     })
 };
 
-/*export function authCuentaGoogle () {
+export const startGoogle = () => {
+  
   const provider = new firebase.auth.GoogleAuthProvider(); //en esta linea se pone el provedor de autenticacion//
-  
-  firebase.auth().signInWithPopup(provider)//el metodo signInWithPopup te abre pantalla emergente para autenticacion de credenciales//
-  .then(result =>{
-    (result.user)
-    Materialize.toast(`Bienvenido ${result.user.displayName} !!!`, 4000)
-  })
-  .catch(error => {
-    console.error(error)
-    Materialize.toast(`Error al autentificarse con google: ${error} `, 4000)
-  })
+
+  firebase.auth().signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
 }
-*/
-/* export function authCuentaFacebook () {
-  const provider = new firebase.auth.FacebookAuthProvider();
-  
-  firebase.auth().signInWithPopup(provider).then(result =>{
-    $('name')
+
+export const startFacebook = () => {
+  const provider = new firebase.auth.FacebookAuthProvider(); //en esta linea se pone el provedor de autenticacion//
+
+  firebase.auth().signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // The signed-in user info.
+    var user = result.user;
+
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    var accessToken = credential.accessToken;
+
+    // ...
   })
-} */
- 
+  .catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+
+    // ...
+  });
+};
