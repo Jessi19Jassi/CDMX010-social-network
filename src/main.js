@@ -1,4 +1,4 @@
-import { routes } from './routes.js'
+import { routes } from './routes.js';
 
 const rootDiv = document.getElementById('root');
 const home = routes[window.location.pathname]
@@ -8,3 +8,7 @@ window.onpopstate = () => {
   const component = routes[window.location.pathname];
   component(rootDiv)
 };
+
+
+
+

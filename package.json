@@ -34,5 +34,9 @@
   },
   "engines": {
     "node": ">=10"
+  },
+  "dependencies": {
+    "firebase": "^8.2.4",
+    "firebase-admin": "^9.5.0"
   }
 }
