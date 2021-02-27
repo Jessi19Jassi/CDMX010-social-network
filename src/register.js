@@ -1,5 +1,5 @@
 import {onNavigate} from './routes.js'
-import {signUp} from './lib/firebase.js'
+import {login} from './lib/firebase.js'
 //let registar = document.querySelector('.registro')//
 export var register = (target) =>{
     const html= `
@@ -21,7 +21,7 @@ document.getElementById('siguiente').addEventListener('click', (e) => {
     e.preventDefault()
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    signUp(email, password);
-    onNavigate('/singUp');
+    login(email, password);
+    onNavigate('/');
   });
 }

@@ -1,6 +1,7 @@
 import { onNavigate } from './routes.js'
 import {startGoogle} from './lib/firebase.js'
 import {startFacebook} from './lib/firebase.js'
+import {signUp} from './lib/firebase.js'
 
 
 export const home = (target) => {
@@ -17,21 +18,21 @@ export const home = (target) => {
     <br>
     <p>O</p>
     <br>
-    <input id="name" type="text" placeholder="usuario">
+    <input id="user" type="text" placeholder="user">
     <br>
-    <input id="password" type="text" placeholder="contraseña">
+    <input id="pass" type="password" placeholder="password">
     <br>
-    <button class="bottonSingUp" id="ingreso">Ingresar</button>
+    <button class="bottonSingUp" id="start">Ingresar</button>
     <br>
         <p>¿No tienes cuenta?</p>
-            <ul class="navbar-item"><a href="#" id="aboutLink">Registrate!!</a></ul>
+            <ul class="navbar-item"><a href="#" id="registerStart">Registrate!!</a></ul>
             </div>
             </div>
     `
 
     target.innerHTML = html
 
-    document.getElementById('aboutLink').addEventListener('click', (e) => {
+    document.getElementById('registerStart').addEventListener('click', (e) => {
         e.preventDefault()
         onNavigate('/register')
     })
@@ -51,9 +52,17 @@ export const home = (target) => {
         onNavigate('/singUp');
     })
 
-    document.getElementById('ingreso').addEventListener('click', (e) => {
+    document.getElementById('start').addEventListener('click', (e) => {
+        
+        const emailUser = document.getElementById('user').value;
+        const passwordUser = document.getElementById('pass').value;
+        signUp(emailUser,passwordUser);
         e.preventDefault()
         onNavigate('/singUp')
+
+    //     if(observador()){
+
+    //     }
     })
 }
 

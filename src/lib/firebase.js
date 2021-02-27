@@ -1,3 +1,5 @@
+
+
 var firebaseConfig = {
   apiKey: "AIzaSyChYnv4amPZ8359mo3gJ6rUZhOK4MnRoLE",
   authDomain: "visage-d-amour-d406d.firebaseapp.com",
@@ -9,7 +11,7 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-export const signUp = (email, password) => {
+export const login = (email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
       //Signed 
@@ -21,6 +23,35 @@ export const signUp = (email, password) => {
       console.log(errorMessage);
     })
 };
+
+export const signUp = (emailUser,passwordUser) => {
+firebase.auth().signInWithEmailAndPassword(emailUser,passwordUser)
+.then((use) => {
+  // Signed in
+  // ...
+})
+.catch((error) => {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+});
+};
+
+export const observador = firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    console.log('Estas registrado');
+    
+    var uid = user.uid;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log('No existe el usuario');
+  }
+});
+
+observador();
 
 export const startGoogle = () => {
   
@@ -76,3 +107,13 @@ export const startFacebook = () => {
     // ...
   });
 };
+
+export const cerrarSesion = () =>{
+  firebase.auth().signOut()
+  .then((user) =>{
+    console.log('Se cerro sesión');
+  })
+  .catch((error) => {
+    console.log('error al cerra sesión');
+  })
+}
