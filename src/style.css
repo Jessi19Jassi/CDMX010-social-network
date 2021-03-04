@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
 *{
     margin: 0%;
     padding: 0%;
@@ -8,13 +9,17 @@
 .displayOne{
     display: flex;
     background-color:#FFEEF1;
-    padding: 25%;
+    padding: 26%;
 }
 .title{
     position: absolute;
-    font-family: -webkit-body;
-    font-size: xx-large;
-    margin: -18%;
+    font-family: 'Tangerine', cursive;
+    font-size: 75px;
+    margin: -20%;
+}
+.title img{
+    position: relative;
+    top: -118px;
 }
 .singUp{
     position: absolute;
@@ -34,10 +39,11 @@
     
 }
 .buttonF{
-    background-color: #2f55a4;
+    background-color: white;
+    color: #2f55a4;
     height: 6%;
     margin: 2%;
-    width: 55%;
+    width: 58%;
     border-radius: 8px 8px;
     cursor: pointer;
     border: 0;
@@ -45,31 +51,214 @@
     
 }
 .buttonG{
-    background-color: #db4a39;
+    background-color: white;
+    color: #db4a39;
     margin: 2%;
     height: 6%;
-    width: 55%;
+    width: 58%;
     border-radius: 8px 8px;
     cursor: pointer;
     border: 0;
     outline: none;
     
 }
+.formOne{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 28px;
+    width: 87%;
+    height: 188px;
+}
 .singUp input{
     border: 0;
-    background-color: #f8efeffc;
+    background-color: white;
     margin: 2%;
     text-align: center;
-    height: 6%;
-    width: 55%;
+    height: 17%;
+    width: 62%;
     outline: none;
     border-radius: 8px 8px;
 }
 .bottonSingUp{
     margin: 2%;
     background: #e44078;
-    height: 7%;
+    height: 19%;
     width: 36%;
+    font-size: larger;
+    border-radius: 14px 14px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+}
+.forRegister{
+    background-color: #FFEEF1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 969px;
+    
+}
+.formTitle{
+font-family: 'Tangerine', cursive;
+    font-size: 111px;
+    margin: revert;
+}
+
+.formPadre{
+    border-radius: 16px 16px;
+    border: 2px solid #FF87AB;
+    background-color: #fab9ce54;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 23%;
+    height: 49%;
+    
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 34px;
+}
+.formPadre input{
+    width: 109%;
+    padding: 4%;
+    margin: 24px;
+    border-radius: 8px 8px;
+    text-align: center;
+    border: 2px solid #FF87AB;
+    outline: none;
+}
+.btnRegister{
+    height: 40px;
+    width: 46%;
+    border-radius: 8px 8px;
+    background: #e44078;
+    outline: none;
+    border: 0;
+}
+.imagen{
+    position: relative;
+    transform: rotate(-2deg);
+    height: 62%;
+    margin: 25px;
+}
+
+.wall {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.texto{
+    margin: revert;
+}
+.formPost{
+    border: 2px solid #FF87AB;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 25em;
+    height: 17em;
+    border-radius: 8px 8px;
+}
+.formS{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 17px;
+}
+.formS input{
+    width: 22em;
+    height: 43px;
+    border: 2px solid #FF87AB;
+    text-align: center;
+    background: #fde8ef;
+    outline: none;
+}
+.formS textarea{
+    width: 100%;
+    height: 125px;
+    border: 2px solid #FF87AB;
+    text-align: center;
+    background: #fde8ef;
+    outline: none;
+}
+.btnPost{
+    margin: 2%;
+    background: #e44078;
+    padding: 3%;
+    width: 56%;
+    font-size: larger;
+    border-radius: 14px 14px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+}
+.muro{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 33%;
+    margin: 6px;
+    border-radius: 8px 8px;
+}
+.cardPost{
+    border: 2px solid #e44078;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 71%;
+    height: 299px;
+    margin: 27px;
+    border-radius: 8px 8px;
+    background-color: #fab9ce54;
+}
+.cPost{
+    border: 2px solid #FF87AB;
+    background: white;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 87%;
+    margin: 5%;
+}
+.cardPost h3{
+    margin: 3%;
+    text-align: center;
+    width: 87%;
+    background-color: white;
+}
+.cardPost p{
+    height: 147px;
+    text-align: center;
+    overflow: scroll;
+    background-color: white;
+}
+.btnReactions{
+    display: flex;
+    justify-content: space-between;
+
+}
+.btnReactions button{
+    margin: 2%;
+    background: #f281a7;
+    width: 112px;
+    font-size: larger;
+    border-radius: 14px 14px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+}
+.btnOff{
+    margin: 2%;
+    background: #e44078;
+    height: 19%;
+    width: 8%;
     font-size: larger;
     border-radius: 14px 14px;
     cursor: pointer;

@@ -1,5 +1,3 @@
-
-
 var firebaseConfig = {
   apiKey: "AIzaSyChYnv4amPZ8359mo3gJ6rUZhOK4MnRoLE",
   authDomain: "visage-d-amour-d406d.firebaseapp.com",
@@ -10,7 +8,10 @@ var firebaseConfig = {
   measurementId: "G-5NDZB83C7P"
 };
 firebase.initializeApp(firebaseConfig);
+/* coneccion con firestore*/
+const db = firebase.firestore(); 
 
+/* Funcion para crear un nuevo usuario y mediantre el registro de email y contraseña*/ 
 export const login = (email, password) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
@@ -24,24 +25,28 @@ export const login = (email, password) => {
     })
 };
 
-export const signUp = (emailUser,passwordUser) => {
+/* Funcion para iniciar sesion con email y password ya registrados en firebase */
+export const signIn = (emailUser, passwordUser) => {
 firebase.auth().signInWithEmailAndPassword(emailUser,passwordUser)
-.then((use) => {
-  // Signed in
+.then((userCredential) => {
+  signIn.reset();
   // ...
+  alert('Bienvenidx', userCredential);
 })
 .catch((error) => {
   var errorCode = error.code;
   var errorMessage = error.message;
-});
+  console.log("usuario no registrado", errorCode);
+  console.log(errorMessage);
+})
 };
 
+/* Funcion para saber si el usuario esta registrado o no en la base de datos */
 export const observador = firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
+  
     console.log('Estas registrado');
-    
+
     var uid = user.uid;
     // ...
   } else {
@@ -50,35 +55,30 @@ export const observador = firebase.auth().onAuthStateChanged((user) => {
     console.log('No existe el usuario');
   }
 });
-
 observador();
 
+/* Funcion para ingresar por medio de Google */
 export const startGoogle = () => {
-  
   const provider = new firebase.auth.GoogleAuthProvider(); //en esta linea se pone el provedor de autenticacion//
-
   firebase.auth().signInWithPopup(provider)
   .then((result) => {
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
-
-    // This gives you a Google Access Token. You can use it to access the Google API.
     var token = credential.accessToken;
-    // The signed-in user info.
     var user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
+    console.log("acceso correcto");
+  })
+  .catch((error) => {
+    
     var errorCode = error.code;
     var errorMessage = error.message;
-    // The email of the user's account used.
     var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
-    // ...
+    console.log("error");
   });
 }
 
+/* Funcion para ingresar con Facebook */
 export const startFacebook = () => {
   const provider = new firebase.auth.FacebookAuthProvider(); //en esta linea se pone el provedor de autenticacion//
 
@@ -86,28 +86,34 @@ export const startFacebook = () => {
   .then((result) => {
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
-
-    // The signed-in user info.
     var user = result.user;
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
     var accessToken = credential.accessToken;
-
-    // ...
   })
   .catch((error) => {
-    // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // The email of the user's account used.
     var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
-
-    // ...
   });
 };
 
+/* Funcion para crear los posts */
+export const response = (title, description) => db.collection('collectionPost').doc().set({//funcion que crea una coleccion donde procesa los documentos a firestore//
+  title,
+  description, 
+});
+
+export const getPosts = async () => {
+  const querySnapshot = await db.collection('collectionPost').get();
+  const posts = []
+  querySnapshot.forEach(doc => {
+      posts.push(doc.data())
+  })
+
+  return posts;
+}
+
+/*  */
 export const cerrarSesion = () =>{
   firebase.auth().signOut()
   .then((user) =>{
