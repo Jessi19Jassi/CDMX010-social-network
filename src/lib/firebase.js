@@ -1,3 +1,5 @@
+import { onNavigate } from '../routes.js';
+
 var firebaseConfig = {
   apiKey: "AIzaSyChYnv4amPZ8359mo3gJ6rUZhOK4MnRoLE",
   authDomain: "visage-d-amour-d406d.firebaseapp.com",
@@ -7,37 +9,66 @@ var firebaseConfig = {
   appId: "1:669529204375:web:802f668fdc1eab2ab02bd2",
   measurementId: "G-5NDZB83C7P"
 };
+
+
 firebase.initializeApp(firebaseConfig);
-/* coneccion con firestore*/
 const db = firebase.firestore(); 
 
 /* Funcion para crear un nuevo usuario y mediantre el registro de email y contraseña*/ 
-export const login = (email, password) => {
+export const login = (email, password, name) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      //Signed 
+    .then((result) => {
+      // onNavigate('/');
+      firebase.auth().signOut(); 
+      cerrarSesion(onNavigate('/'));
+      alert('Ve a tu correo electronico y verifica tu cuenta para poder ingresar');
+      result.user.updateProfile({
+        displayName: name
+      })
+
+      const configuracion = { //Redirije al usuario después de verificar su email
+        url: 'http://localhost:5000'
+      }
+      result.user.sendEmailVerification(configuracion) //Enviar correo al usuario para verficar su email
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      })
+
+      firebase.auth().signOut(); 
+      // alert('Bienvenidx' + name.value);
+
     })
     .catch((error) => {
+
+      if(name === '' || email === '' || password ==='')
+      {
+        alert('Llena todos los campos para completar tu registro');
+      }
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode);
       console.log(errorMessage);
+      alert('Para poder ingresar registrate ANTES!'); 
     })
 };
 
 /* Funcion para iniciar sesion con email y password ya registrados en firebase */
-export const signIn = (emailUser, passwordUser) => {
+export const signIn = (emailUser, passwordUser, name) => {
 firebase.auth().signInWithEmailAndPassword(emailUser,passwordUser)
 .then((userCredential) => {
-  signIn.reset();
   // ...
-  alert('Bienvenidx', userCredential);
+  onNavigate('/singUp');
+  alert('Bienvenidx' +  name.value, userCredential);
+
 })
 .catch((error) => {
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  console.log("usuario no registrado", errorCode);
-  console.log(errorMessage);
+  // var errorCode = error.code;
+  // var errorMessage = error.message;
+  alert('Ingresa tus datos para iniciar sesión', error);
+  // console.log(errorMessage);
 })
 };
 
@@ -52,7 +83,7 @@ export const observador = firebase.auth().onAuthStateChanged((user) => {
   } else {
     // User is signed out
     // ...
-    console.log('No existe el usuario');
+    alert('Usuario no existente');
   }
 });
 observador();
@@ -62,11 +93,12 @@ export const startGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider(); //en esta linea se pone el provedor de autenticacion//
   firebase.auth().signInWithPopup(provider)
   .then((result) => {
+    onNavigate('/singUp');
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
     var token = credential.accessToken;
     var user = result.user;
-    console.log("acceso correcto");
+    console.log("Acceso correcto");
   })
   .catch((error) => {
     
@@ -74,7 +106,7 @@ export const startGoogle = () => {
     var errorMessage = error.message;
     var email = error.email;
     var credential = error.credential;
-    console.log("error");
+    console.log("Error");
   });
 }
 
@@ -84,6 +116,7 @@ export const startFacebook = () => {
 
   firebase.auth().signInWithPopup(provider)
   .then((result) => {
+    onNavigate('/singUp');
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
     var user = result.user;
@@ -113,13 +146,13 @@ export const getPosts = async () => {
   return posts;
 }
 
-/*  */
+//Función para cerrar sesión
 export const cerrarSesion = () =>{
   firebase.auth().signOut()
   .then((user) =>{
-    console.log('Se cerro sesión');
+    alert('Cerraste sesión correctamente');
   })
   .catch((error) => {
-    console.log('error al cerra sesión');
+    console.log('error al cerrar sesión');
   })
 }

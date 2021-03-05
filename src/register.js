@@ -1,14 +1,15 @@
-import { onNavigate } from './routes.js'
 import { login } from './lib/firebase.js'
 
-export var register = (target) => {
+export const register = (target) => {
   const html = `
 
   <div class="forRegister">
     <h1 class="formTitle">Registrate</h1>
       <div class="formPadre">
-        <form id="siguiente" class="form">
-          <input id="email" type="text" placeholder="Correo electronico">
+        <form id="siguiente" class="form">          
+          <input id="name" type="text" placeholder="Nombres">
+          <br>
+          <input id="email" type="text" placeholder="Correo electrónico">
           <br>
           <input id="password" type="password" placeholder="Contraseña">
           <br>
@@ -19,12 +20,16 @@ export var register = (target) => {
   </div>
     `
   target.innerHTML = html
-
-  document.getElementById('siguiente').addEventListener('submit', (e) => {
+  
+const formRegister = document.getElementById('siguiente');
+  
+formRegister.addEventListener('submit', (e) => {
     e.preventDefault()
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    login(email, password);
-    onNavigate('/singUp');
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const name = document.getElementById('name');
+    login(email, password, name);
+    formRegister.reset();
+    name.focus(); 
   });
 }

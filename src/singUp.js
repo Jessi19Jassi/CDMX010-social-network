@@ -5,7 +5,7 @@ import { CardPost } from './components/CardPost.js';
 export const singUp = async (target) => {
     const html = `
         <div class="wall">
-        <h1 class="texto">Hola! aqui mostraremos nuestras publicaciones y comentarios</h1>
+            <h1 class="texto">Hola! aqui mostraremos nuestras publicaciones y comentarios</h1>
         <div class="formPost">
             <form id="form" class="formS">
                 <input id="title" type="text" placeholder="Escribe aquí tu post">
@@ -16,10 +16,10 @@ export const singUp = async (target) => {
             </form>
         </div>
          <br>
-         <div id="wall" class="muro"></div>
-         <br>
-        <button id="logOut" class="btnOff">Cerrar Sesión</button>
-    </div>
+            <div id="wall" class="muro"></div>
+                <br>
+                <button id="logOut" class="btnOff">Cerrar Sesión</button>
+            </div>
     `
     target.innerHTML = html;
 
@@ -43,6 +43,8 @@ export const singUp = async (target) => {
         formPost.reset();
         title.focus();
     })
+
+    
 
     document.getElementById('logOut').addEventListener('click', (e) => {
         e.preventDefault();
