@@ -23,6 +23,7 @@ export const singUp = async (target) => {
     `
     target.innerHTML = html;
 
+
     const formPost = document.getElementById('form');
     const wallElement = document.getElementById('wall');
 
@@ -32,6 +33,8 @@ export const singUp = async (target) => {
     });
 
     wallElement.innerHTML = postsTemplate.join('');
+    alert('Bienvenidx');
+
 
     formPost.addEventListener('submit', async (e) => {
         e.preventDefault();

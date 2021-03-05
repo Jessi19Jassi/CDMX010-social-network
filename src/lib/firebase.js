@@ -14,80 +14,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore(); 
 
-/* Funcion para crear un nuevo usuario y mediantre el registro de email y contraseña*/ 
-export const login = (email, password, name) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      // onNavigate('/');
-      firebase.auth().signOut(); 
-      cerrarSesion(onNavigate('/'));
-      alert('Ve a tu correo electronico y verifica tu cuenta para poder ingresar');
-      result.user.updateProfile({
-        displayName: name
-      })
-
-      const configuracion = { //Redirije al usuario después de verificar su email
-        url: 'http://localhost:5000'
-      }
-      result.user.sendEmailVerification(configuracion) //Enviar correo al usuario para verficar su email
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-      })
-
-      firebase.auth().signOut(); 
-      // alert('Bienvenidx' + name.value);
-
-    })
-    .catch((error) => {
-
-      if(name === '' || email === '' || password ==='')
-      {
-        alert('Llena todos los campos para completar tu registro');
-      }
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-      alert('Para poder ingresar registrate ANTES!'); 
-    })
-};
-
-/* Funcion para iniciar sesion con email y password ya registrados en firebase */
-export const signIn = (emailUser, passwordUser, name) => {
-firebase.auth().signInWithEmailAndPassword(emailUser,passwordUser)
-.then((userCredential) => {
-  // ...
-  onNavigate('/singUp');
-  alert('Bienvenidx' +  name.value, userCredential);
-
-})
-.catch((error) => {
-  // var errorCode = error.code;
-  // var errorMessage = error.message;
-  alert('Ingresa tus datos para iniciar sesión', error);
-  // console.log(errorMessage);
-})
-};
-
-/* Funcion para saber si el usuario esta registrado o no en la base de datos */
-export const observador = firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-  
-    console.log('Estas registrado');
-
-    var uid = user.uid;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-    alert('Usuario no existente');
-  }
-});
-observador();
-
 /* Funcion para ingresar por medio de Google */
 export const startGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider(); //en esta linea se pone el provedor de autenticacion//
@@ -130,6 +56,72 @@ export const startFacebook = () => {
   });
 };
 
+/* Funcion para iniciar sesion con email y password ya registrados en firebase */
+export const signIn = (emailUser, passwordUser) => {
+  firebase.auth().signInWithEmailAndPassword(emailUser,passwordUser)
+  .then((userCredential) => {
+    onNavigate('/singUp');
+  
+  })
+  .catch((error) => {
+    alert('Ingresa tus datos para iniciar sesión', error);
+  })
+  };
+  
+  /* Funcion para saber si el usuario esta registrado o no en la base de datos */
+  export const observador = firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+    
+      console.log('Estas registrado');
+  
+      var uid = user.uid;
+
+    } 
+    else {
+      alert('Usuario no existente');
+    }
+  });
+  observador();
+
+/* Funcion para crear un nuevo usuario y mediantre el registro de email y contraseña*/ 
+export const login = (email, password, name) => {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      firebase.auth().signOut(); 
+      cerrarSesion(onNavigate('/'));
+      alert('Ve a tu correo electronico y verifica tu cuenta para poder ingresar');
+      result.user.updateProfile({
+        displayName: name
+      })
+
+      const configuracion = { //Redirije al usuario después de verificar su email
+        url: 'http://localhost:5000'
+      }
+      result.user.sendEmailVerification(configuracion) //Enviar correo al usuario para verficar su email
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      })
+
+      firebase.auth().signOut(); 
+
+    })
+    .catch((error) => {
+
+      if(name === '' || email === '' || password ==='')
+      {
+        const errorMessage = error.message;
+        alert('Llena todos los campos para completar tu registro', errorMessage);
+      }
+      else{
+      const errorCode = error.code;
+      alert('Usuario ya existente, intente con otro', errorCode);
+      }
+    })
+};
+
 /* Funcion para crear los posts */
 export const response = (title, description) => db.collection('collectionPost').doc().set({//funcion que crea una coleccion donde procesa los documentos a firestore//
   title,
@@ -142,7 +134,6 @@ export const getPosts = async () => {
   querySnapshot.forEach(doc => {
       posts.push(doc.data())
   })
-
   return posts;
 }
 
@@ -153,6 +144,6 @@ export const cerrarSesion = () =>{
     alert('Cerraste sesión correctamente');
   })
   .catch((error) => {
-    console.log('error al cerrar sesión');
+    console.log('Error al cerrar sesión');
   })
 }
