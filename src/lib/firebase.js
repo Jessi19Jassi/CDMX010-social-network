@@ -64,7 +64,7 @@ export const signIn = (emailUser, passwordUser) => {
   
   })
   .catch((error) => {
-    alert('Ingresa tus datos para iniciar sesión', error);
+    alert('Ingresa tus datos correctamente para iniciar sesión', error);
   })
   };
   
@@ -142,6 +142,7 @@ export const cerrarSesion = () =>{
   firebase.auth().signOut()
   .then((user) =>{
     alert('Cerraste sesión correctamente');
+    onNavigate('/')
   })
   .catch((error) => {
     console.log('Error al cerrar sesión');

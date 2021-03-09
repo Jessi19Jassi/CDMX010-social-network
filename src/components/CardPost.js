@@ -8,7 +8,7 @@ export const CardPost = (post) => {
      <div class="btnReactions">
       <button>Eliminar</button>
       <button>Editar</button>
-      <button>Like</button>
+      <button><i class="far fa-heart"></i></button>
     </div>
   </div>
   `
