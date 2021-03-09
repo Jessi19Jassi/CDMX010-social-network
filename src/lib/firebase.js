@@ -20,6 +20,7 @@ export const startGoogle = () => {
   firebase.auth().signInWithPopup(provider)
   .then((result) => {
     onNavigate('/singUp');
+    alert('Bienvenidx');
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
     var token = credential.accessToken;
@@ -43,6 +44,7 @@ export const startFacebook = () => {
   firebase.auth().signInWithPopup(provider)
   .then((result) => {
     onNavigate('/singUp');
+    alert('Bienvenidx');
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
     var user = result.user;
@@ -61,6 +63,7 @@ export const signIn = (emailUser, passwordUser) => {
   firebase.auth().signInWithEmailAndPassword(emailUser,passwordUser)
   .then((userCredential) => {
     onNavigate('/singUp');
+    alert('Bienvenidx');
   
   })
   .catch((error) => {
