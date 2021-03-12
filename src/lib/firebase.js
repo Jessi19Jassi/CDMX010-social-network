@@ -133,11 +133,19 @@ export const response = (title, description) => db.collection('collectionPost').
 
 export const getPosts = async () => {
   const querySnapshot = await db.collection('collectionPost').get();
-  const posts = []
+  const posts = [];
+
   querySnapshot.forEach(doc => {
-      posts.push(doc.data())
+      const post = doc.data()
+      post.id = doc.id
+      posts.unshift(post); 
   })
   return posts;
+}
+
+//funcion para eliminar posts//
+export const deleteData = (id) => { 
+  return db.collection('collectionPost').doc(id).delete();
 }
 
 //Función para cerrar sesión

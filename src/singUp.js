@@ -1,4 +1,4 @@
-import { cerrarSesion, response, getPosts } from './lib/firebase.js';
+import { cerrarSesion, response, getPosts, deleteData } from './lib/firebase.js';
 import { CardPost } from './components/CardPost.js';
 import { onNavigate } from './routes.js';
 
@@ -16,7 +16,7 @@ export const singUp = async (target) => {
                      </nav>
             </header>
         </div>    
-            <h1 class="texto">Hola! aqui mostraremos nuestras publicaciones y comentarios</h1>
+            <h1 class="texto">Escribe aqui tus publicaciones!</h1>
         <div class="formPost">
             <form id="form" class="formS">
                 <input id="title" type="text" placeholder="Escribe aquí tu post">
@@ -54,9 +54,10 @@ export const singUp = async (target) => {
     const wallElement = document.getElementById('wall');
 
     const posts = await getPosts()
+    
     const postsTemplate = posts.map((post) => {
         return CardPost(post);
-                
+        
     });
 
     wallElement.innerHTML = postsTemplate.join('');
@@ -75,7 +76,20 @@ export const singUp = async (target) => {
         
     })
 
-    
+    const deleteBtns = document.querySelectorAll('.delete'); // []
+
+    deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const id = e.target.dataset.id;
+            console.log(e.target.dataset)
+            try {
+                await deleteData(id)
+                console.log("se elimino correctamente");
+            } catch (error) {
+                console.error("no se elimino el documento ", error);
+            }
+        });
+    })
 }
 
 

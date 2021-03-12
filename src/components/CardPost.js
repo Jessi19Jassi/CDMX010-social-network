@@ -6,10 +6,10 @@ export const CardPost = (post) => {
      <p>${post.description}</p>
      </div>
      <div class="btnReactions">
-      <button>Eliminar</button>
+      <button class="delete" data-id="${post.id}">Eliminar</button>
       <button>Editar</button>
       <button><i class="far fa-heart"></i></button>
     </div>
   </div>
-  `
+  `;
 };
