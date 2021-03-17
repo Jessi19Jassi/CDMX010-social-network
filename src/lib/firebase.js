@@ -148,6 +148,15 @@ export const deleteData = (id) => {
   return db.collection('collectionPost').doc(id).delete();
 }
 
+export const editData = (id) => { 
+  return db.collection('collectionPost').doc(id).get();
+}
+
+export const updateData = (id, updatedPost) => {
+  return db.collection('collectionPost').doc(id).update(updatedPost);
+}
+
+
 //Función para cerrar sesión
 export const cerrarSesion = () =>{
   firebase.auth().signOut()

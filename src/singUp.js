@@ -1,4 +1,4 @@
-import { cerrarSesion, response, getPosts, deleteData } from './lib/firebase.js';
+import { cerrarSesion, response, getPosts, deleteData, editData, updateData } from './lib/firebase.js';
 import { CardPost } from './components/CardPost.js';
 import { onNavigate } from './routes.js';
 
@@ -61,15 +61,25 @@ export const singUp = async (target) => {
     });
 
     wallElement.innerHTML = postsTemplate.join('');
+    let editStatus = false;
+    let ids = ''; //Parametro vacío para meter el id que elija
 
 
     formPost.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const title = formPost["title"];
-        const description = formPost["description"]
+        const description = formPost["description"];
+        
+        if(!editStatus){
+            await response(title.value, description.value);
+        }else{
+            await updateData(ids,{
+                title: title.value,
+                description: description.value
+            })
+        }
 
-        await response(title.value, description.value);
         onNavigate('/singUp');
         formPost.reset();
         title.focus();
@@ -85,11 +95,28 @@ export const singUp = async (target) => {
             try {
                 await deleteData(id)
                 console.log("se elimino correctamente");
+                onNavigate('/singUp');
             } catch (error) {
                 console.error("no se elimino el documento ", error);
             }
         });
     })
-}
 
+    const editBtns = document.querySelectorAll('.edit'); // []
+
+    editBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const id = e.target.dataset.id;
+            const doc = await editData(id);
+            const docEdit = doc.data();
+
+            editStatus = true;
+            ids = doc.id; //id que elija
+
+            formPost["title"].value = docEdit.title;
+            formPost["description"].value = docEdit.description;
+            formPost["btn"].innerText = 'Guardar';
+        })
+    })
+}
 
