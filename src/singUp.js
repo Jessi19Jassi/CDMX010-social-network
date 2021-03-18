@@ -16,14 +16,13 @@ export const singUp = async (target) => {
                      </nav>
             </header>
         </div>    
-            <h1 class="texto">Escribe aqui tus publicaciones!</h1>
         <div class="formPost">
             <form id="form" class="formS">
                 <input id="title" type="text" placeholder="Escribe aquí tu post">
                 <br>
                 <textarea id="description" placeholder="Escribe aquí tu descripcion"></textarea>
                 <br>
-                <button id="btn" class="btnPost">publicar</button>
+                <button id="btn" class="btnPost">Publicar</button>
             </form>
         </div>
          <br>
@@ -93,8 +92,8 @@ export const singUp = async (target) => {
             const id = e.target.dataset.id;
             console.log(e.target.dataset)
             try {
+                alert("¿Deseas eliminar el post?");
                 await deleteData(id)
-                console.log("se elimino correctamente");
                 onNavigate('/singUp');
             } catch (error) {
                 console.error("no se elimino el documento ", error);

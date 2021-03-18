@@ -125,12 +125,12 @@ export const login = (email, password, name) => {
     })
 };
 
-/* Funcion para crear los posts */
+/*----FUNCION PARA CREA LA COLECCION MAS LOS DOCUMENTOS-----*/
 export const response = (title, description) => db.collection('collectionPost').doc().set({//funcion que crea una coleccion donde procesa los documentos a firestore//
   title,
   description, 
 });
-
+//----FUNCION QUE TRAE TODOS LOS ELEMENTOS DE LOS DOCUMENTOS DE LA COLECCION---//
 export const getPosts = async () => {
   const querySnapshot = await db.collection('collectionPost').get();
   const posts = [];
@@ -143,21 +143,22 @@ export const getPosts = async () => {
   return posts;
 }
 
-//funcion para eliminar posts//
+//----FUNCION PARA ELIMINAR POSTS-----//
 export const deleteData = (id) => { 
   return db.collection('collectionPost').doc(id).delete();
 }
-
+/*------FUNCION PARA EDITAR POSTS-----*/
+//funcion para recolectar los elementos de un documento en especifico//
 export const editData = (id) => { 
   return db.collection('collectionPost').doc(id).get();
 }
-
+//funcion para actualizar datos en firestore//
 export const updateData = (id, updatedPost) => {
   return db.collection('collectionPost').doc(id).update(updatedPost);
 }
 
 
-//Función para cerrar sesión
+//----FUNCION PARA CERRAR SESIÓN----//
 export const cerrarSesion = () =>{
   firebase.auth().signOut()
   .then((user) =>{

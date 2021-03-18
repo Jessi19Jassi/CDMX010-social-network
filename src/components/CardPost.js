@@ -6,9 +6,9 @@ export const CardPost = (post) => {
      <p>${post.description}</p>
      </div>
      <div class="btnReactions">
-      <button class="delete" data-id="${post.id}">Eliminar</button>
-      <button class="edit" data-id="${post.id}">Editar</button>
-      <button><i class="far fa-heart"></i></button>
+      <button class="delete" data-id="${post.id}"><i class="icono fas fa-trash-alt"></i></button>
+      <button class="edit" data-id="${post.id}"><i class="icono fas fa-edit"></i></button>
+      <button><i class="icono far fa-heart"></i></button>
     </div>
   </div>
   `;
