@@ -118,18 +118,8 @@ export const singUp = async (target) => {
             formPost["btn"].innerText = 'Guardar';
         })
     })
-
-
-    
-    // const likeBtns = document.querySelectorAll('.like');
-
-    // likeBtns.forEach(btn => {
-    //     btn.addEventListener('click', async (e) => {
-    //         await counterLikes(e);
-    //     })
-    // })
-
 }
+
 export const counterLikes = async (e) =>{
     const idUser = localStorage.getItem('userId'); //uid
     console.log(idUser);

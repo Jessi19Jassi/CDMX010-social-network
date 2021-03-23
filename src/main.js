@@ -9,9 +9,11 @@ rootDiv.addEventListener('click', (e) =>  {
   let button = e.target;
 
   if(button.id === 'like'){
-    counterLikes(e)
+    counterLikes(e);
   }
 })
+
+
 
 
 window.onpopstate = () => {

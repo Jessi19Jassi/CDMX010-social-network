@@ -10,8 +10,8 @@ export const CardPost = (post) => {
      </div>
      <div class="btnReactions">
       <button class="delete" data-id="${post.id}"><i class="icono fas fa-trash-alt"></i></button>
-      <button class="edit" data-id="${post.id}"><i class="icono fas fa-edit"></i></button>
-      <button class="like" id="like" data-id="${post.id}"><i class="icono far fa-heart"></i></button>
+      <button class="edit" id="edit"data-id="${post.id}"><i class="icono fas fa-edit"></i></button>
+      <button class="like" ><i class="icono far fa-heart" id="like" data-id="${post.id}"></i></button>
       <span class="count" data-id="${post.id}">${countLikes}</span> 
     </div>
   </div>
