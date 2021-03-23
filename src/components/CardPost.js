@@ -1,4 +1,7 @@
 export const CardPost = (post) => {
+  const arrayLikes = post.like;
+  const countLikes = arrayLikes.length;
+
   return `
   <div class="cardPost">
     <div class="cPost">
@@ -8,7 +11,8 @@ export const CardPost = (post) => {
      <div class="btnReactions">
       <button class="delete" data-id="${post.id}"><i class="icono fas fa-trash-alt"></i></button>
       <button class="edit" data-id="${post.id}"><i class="icono fas fa-edit"></i></button>
-      <button><i class="icono far fa-heart"></i></button>
+      <button class="like" id="like" data-id="${post.id}"><i class="icono far fa-heart"></i></button>
+      <span class="count" data-id="${post.id}">${countLikes}</span> 
     </div>
   </div>
   `;

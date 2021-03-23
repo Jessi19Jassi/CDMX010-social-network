@@ -1,4 +1,4 @@
-import { cerrarSesion, response, getPosts, deleteData, editData, updateData } from './lib/firebase.js';
+import { cerrarSesion, response, getPosts, deleteData, editData, updateData} from './lib/firebase.js';
 import { CardPost } from './components/CardPost.js';
 import { onNavigate } from './routes.js';
 
@@ -69,13 +69,14 @@ export const singUp = async (target) => {
 
         const title = formPost["title"];
         const description = formPost["description"];
+        let arrayLikes = [];
         
         if(!editStatus){
-            await response(title.value, description.value);
+            await response(title.value, description.value, arrayLikes);
         }else{
             await updateData(ids,{
                 title: title.value,
-                description: description.value
+                description: description.value,
             })
         }
 
@@ -117,5 +118,32 @@ export const singUp = async (target) => {
             formPost["btn"].innerText = 'Guardar';
         })
     })
-}
 
+
+    
+    // const likeBtns = document.querySelectorAll('.like');
+
+    // likeBtns.forEach(btn => {
+    //     btn.addEventListener('click', async (e) => {
+    //         await counterLikes(e);
+    //     })
+    // })
+
+}
+export const counterLikes = async (e) =>{
+    const idUser = localStorage.getItem('userId'); //uid
+    console.log(idUser);
+    const id = e.target.dataset.id;
+    const docu = await editData(id);
+
+    const arrLikes = docu.data().like; //Vaciar likes
+    console.log(arrLikes);
+    if(arrLikes.includes(idUser)){ //Si está el like lo quita
+        firebase.firestore().collection('collectionPost').doc(id).update({like: firebase.firestore.FieldValue.arrayRemove(idUser)});
+        onNavigate('/singUp');
+    }
+    else{  //Si no está el like lo agrega
+        firebase.firestore().collection('collectionPost').doc(id).update({like: firebase.firestore.FieldValue.arrayUnion(idUser)});
+        onNavigate('/singUp');
+    }
+}

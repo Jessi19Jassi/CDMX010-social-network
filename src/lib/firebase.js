@@ -25,6 +25,7 @@ export const startGoogle = () => {
     var credential = result.credential;
     var token = credential.accessToken;
     var user = result.user;
+    localStorage.setItem('userId', result.user.uid);
     console.log("Acceso correcto");
   })
   .catch((error) => {
@@ -64,7 +65,7 @@ export const signIn = (emailUser, passwordUser) => {
   .then((userCredential) => {
     onNavigate('/singUp');
     alert('Bienvenidx');
-  
+    localStorage.setItem('userId', userCredential.user.uid);
   })
   .catch((error) => {
     alert('Ingresa tus datos correctamente para iniciar sesión', error);
@@ -93,6 +94,7 @@ export const login = (email, password, name) => {
       firebase.auth().signOut(); 
       cerrarSesion(onNavigate('/'));
       alert('Ve a tu correo electronico y verifica tu cuenta para poder ingresar');
+      // localStorage.setItem('userId')
       result.user.updateProfile({
         displayName: name
       })
@@ -125,10 +127,11 @@ export const login = (email, password, name) => {
     })
 };
 
-/*----FUNCION PARA CREA LA COLECCION MAS LOS DOCUMENTOS-----*/
-export const response = (title, description) => db.collection('collectionPost').doc().set({//funcion que crea una coleccion donde procesa los documentos a firestore//
+/*----FUNCION PARA CREAR LA COLECCION MAS LOS DOCUMENTOS-----*/
+export const response = (title, description, like) => db.collection('collectionPost').doc().set({//funcion que crea una coleccion donde procesa los documentos a firestore//
   title,
   description, 
+  like
 });
 //----FUNCION QUE TRAE TODOS LOS ELEMENTOS DE LOS DOCUMENTOS DE LA COLECCION---//
 export const getPosts = async () => {
@@ -139,6 +142,10 @@ export const getPosts = async () => {
       const post = doc.data()
       post.id = doc.id
       posts.unshift(post); 
+      // const arrayLikes = post.like;
+      // const countLikes = arrayLikes.length;
+      // console.log(arrayLikes);
+      // console.log(countLikes);
   })
   return posts;
 }
@@ -156,7 +163,6 @@ export const editData = (id) => {
 export const updateData = (id, updatedPost) => {
   return db.collection('collectionPost').doc(id).update(updatedPost);
 }
-
 
 //----FUNCION PARA CERRAR SESIÓN----//
 export const cerrarSesion = () =>{
