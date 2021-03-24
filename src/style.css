@@ -289,6 +289,10 @@ font-family: 'Tangerine', cursive;
     margin-bottom: 2%;
 
 }
+.count{
+    margin-left: -86px;
+    font-size: 30px;
+}
 .btnReactions button{
     background: #f281a7;
     width: 50px;
