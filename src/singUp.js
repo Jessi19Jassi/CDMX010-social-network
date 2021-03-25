@@ -1,4 +1,4 @@
-import { cerrarSesion, response, getPosts, deleteData, editData, updateData} from './lib/firebase.js';
+import { cerrarSesion, response, getPosts, deleteData, editData, updateData } from './lib/firebase.js';
 import { CardPost } from './components/CardPost.js';
 import { onNavigate } from './routes.js';
 
@@ -59,10 +59,8 @@ export const singUp = async (target) => {
     let editStatus = false;
     let ids = ''; //Parametro vacío para meter el id que elija
 
-
     formPost.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         const title = formPost["title"];
         const description = formPost["description"];
         let arrayLikes = [];
@@ -75,7 +73,6 @@ export const singUp = async (target) => {
                 description: description.value,
             })
         }
-
         onNavigate('/singUp');
         formPost.reset();
         title.focus();
@@ -87,13 +84,12 @@ export const singUp = async (target) => {
     deleteBtns.forEach(btn => {
         btn.addEventListener('click', async (e) => {
             const id = e.target.dataset.id;
-            console.log(e.target.dataset)
             try {
-                alert("¿Deseas eliminar el post?");
                 await deleteData(id)
+                alert("¿Deseas eliminar el post?");
                 onNavigate('/singUp');
             } catch (error) {
-                console.error("no se elimino el documento ", error);
+                alert("no se elimino el documento ", error);
             }
         });
     })
@@ -108,22 +104,19 @@ export const singUp = async (target) => {
 
             editStatus = true;
             ids = doc.id; //id que elija
-
             formPost["title"].value = docEdit.title;
             formPost["description"].value = docEdit.description;
             formPost["btn"].innerText = 'Guardar';
         })
     })
-}
+};
 
 export const counterLikes = async (e) =>{
     const idUser = localStorage.getItem('userId'); //uid
-    console.log(idUser);
     const id = e.target.dataset.id;
     const docu = await editData(id);
-
     const arrLikes = docu.data().like; //Vaciar likes
-    console.log(arrLikes);
+    
     if(arrLikes.includes(idUser)){ //Si está el like lo quita
         firebase.firestore().collection('collectionPost').doc(id).update({like: firebase.firestore.FieldValue.arrayRemove(idUser)});
         onNavigate('/singUp');
@@ -132,4 +125,4 @@ export const counterLikes = async (e) =>{
         firebase.firestore().collection('collectionPost').doc(id).update({like: firebase.firestore.FieldValue.arrayUnion(idUser)});
         onNavigate('/singUp');
     }
-}
+};

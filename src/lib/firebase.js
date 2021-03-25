@@ -26,7 +26,6 @@ export const startGoogle = () => {
     var token = credential.accessToken;
     var user = result.user;
     localStorage.setItem('userId', result.user.uid);
-    console.log("Acceso correcto");
   })
   .catch((error) => {
     
@@ -34,7 +33,6 @@ export const startGoogle = () => {
     var errorMessage = error.message;
     var email = error.email;
     var credential = error.credential;
-    console.log("Error");
   });
 }
 
@@ -71,34 +69,17 @@ export const signIn = (emailUser, passwordUser) => {
     alert('Ingresa tus datos correctamente para iniciar sesión', error);
   })
   };
-  
-  /* Funcion para saber si el usuario esta registrado o no en la base de datos */
-  export const observador = firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-    
-      console.log('Estas registrado');
-  
-      var uid = user.uid;
-
-    } 
-    else {
-      alert('Usuario no existente');
-    }
-  });
-  observador();
 
 /* Funcion para crear un nuevo usuario y mediantre el registro de email y contraseña*/ 
 export const login = (email, password, name) => {
   firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      firebase.auth().signOut(); 
+    .then((result) => { 
       cerrarSesion(onNavigate('/'));
       alert('Ve a tu correo electronico y verifica tu cuenta para poder ingresar');
-      // localStorage.setItem('userId')
+
       result.user.updateProfile({
         displayName: name
       })
-
       const configuracion = { //Redirije al usuario después de verificar su email
         url: 'http://localhost:5000'
       }
@@ -106,15 +87,9 @@ export const login = (email, password, name) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
       })
-
-      firebase.auth().signOut(); 
-
     })
     .catch((error) => {
-
       if(name === '' || email === '' || password ==='')
       {
         const errorMessage = error.message;
@@ -141,11 +116,7 @@ export const getPosts = async () => {
   querySnapshot.forEach(doc => {
       const post = doc.data()
       post.id = doc.id
-      posts.unshift(post); 
-      // const arrayLikes = post.like;
-      // const countLikes = arrayLikes.length;
-      // console.log(arrayLikes);
-      // console.log(countLikes);
+      posts.unshift(post);
   })
   return posts;
 }
@@ -154,11 +125,13 @@ export const getPosts = async () => {
 export const deleteData = (id) => { 
   return db.collection('collectionPost').doc(id).delete();
 }
+
 /*------FUNCION PARA EDITAR POSTS-----*/
 //funcion para recolectar los elementos de un documento en especifico//
 export const editData = (id) => { 
   return db.collection('collectionPost').doc(id).get();
 }
+
 //funcion para actualizar datos en firestore//
 export const updateData = (id, updatedPost) => {
   return db.collection('collectionPost').doc(id).update(updatedPost);
@@ -168,10 +141,10 @@ export const updateData = (id, updatedPost) => {
 export const cerrarSesion = () =>{
   firebase.auth().signOut()
   .then((user) =>{
-    alert('Cerraste sesión correctamente');
+    alert('Cerraste sesión correctamente', user);
     onNavigate('/')
   })
   .catch((error) => {
-    console.log('Error al cerrar sesión');
+    alert('Error al cerrar sesión',error);
   })
 }

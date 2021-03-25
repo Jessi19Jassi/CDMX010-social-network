@@ -102,7 +102,8 @@
 .formTitle{
 font-family: 'Tangerine', cursive;
     font-size: 111px;
-    margin: revert;
+    margin-top: 13px;
+    margin-bottom: 13px;
 }
 
 .formPadre{
@@ -112,8 +113,8 @@ font-family: 'Tangerine', cursive;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 23%;
-    height: 49%;
+    width: 24%;
+    height: 46%;
     
 }
 .form{
@@ -123,8 +124,8 @@ font-family: 'Tangerine', cursive;
     margin: 34px;
 }
 .formPadre input{
-    width: 109%;
-    padding: 4%;
+    width: 142%;
+    padding: 6%;
     margin: 24px;
     border-radius: 8px 8px;
     text-align: center;
@@ -132,8 +133,8 @@ font-family: 'Tangerine', cursive;
     outline: none;
 }
 .btnRegister{
-    height: 40px;
-    width: 46%;
+    height: 44px;
+    width: 63%;
     border-radius: 8px 8px;
     background: #e44078;
     outline: none;
@@ -141,9 +142,9 @@ font-family: 'Tangerine', cursive;
 }
 .imagen{
     position: relative;
-    transform: rotate(-2deg);
+    transform: rotate(-1deg);
     height: 62%;
-    margin: 25px;
+    margin: -10px;
 }
 .headerDad{
     position: fixed;

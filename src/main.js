@@ -13,9 +13,6 @@ rootDiv.addEventListener('click', (e) =>  {
   }
 })
 
-
-
-
 window.onpopstate = () => {
   const component = routes[window.location.pathname];
   component(rootDiv)
